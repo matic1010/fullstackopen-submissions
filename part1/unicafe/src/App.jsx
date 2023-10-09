@@ -36,19 +36,34 @@ function App() {
       <Button handleClick={increaseGood} text="good" />
       <Button handleClick={increaseNeutral} text="neutral" />
       <Button handleClick={increaseBad} text="bad" />
-      <h2>statistics</h2>
-      <p>good {good}</p>
-      <p>neutral {neutral}</p>
-      <p>bad {bad}</p>
-      <p>all {total}</p>
-      <p>average {getAverage() || 0}</p>
-      <p>positive {getPositivePercentage() || 0}%</p>
+      <Statistics
+        good={good}
+        bad={bad}
+        neutral={neutral}
+        total={total}
+        average={getAverage() || 0}
+        positive={getPositivePercentage() || 0}
+      />
     </div>
   );
 }
 
 const Button = ({ handleClick, text }) => {
   return <button onClick={handleClick}>{text}</button>;
+};
+
+const Statistics = ({ good, neutral, bad, total, average, positive }) => {
+  return (
+    <>
+      <h2>statistics</h2>
+      <p>good {good}</p>
+      <p>neutral {neutral}</p>
+      <p>bad {bad}</p>
+      <p>all {total}</p>
+      <p>average {average}</p>
+      <p>positive {positive}%</p>
+    </>
+  );
 };
 
 export default App;
