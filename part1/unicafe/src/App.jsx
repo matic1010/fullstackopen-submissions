@@ -9,25 +9,25 @@ function App() {
   const increaseGood = () => {
     const updatedGood = good + 1;
     setGood(updatedGood);
-    setTotal(updatedGood + total);
+    setTotal(total + 1);
   };
 
   const increaseNeutral = () => {
     const updatedNeutral = neutral + 1;
     setNeutral(updatedNeutral);
-    setTotal(updatedNeutral + total);
+    setTotal(total + 1);
   };
   const increaseBad = () => {
     const updatedBad = bad + 1;
     setBad(updatedBad);
-    setTotal(updatedBad + total);
+    setTotal(total + 1);
   };
 
   const getAverage = () => {
-    return (good - bad) / total;
+    return Math.round(((good - bad) / total) * 100) / 100;
   };
   const getPositivePercentage = () => {
-    return (good / total) * 100;
+    return Math.round((good / total) * 100) / 100;
   };
 
   return (
@@ -57,14 +57,16 @@ const Statistics = ({ good, neutral, bad, total, average, positive }) => {
     <>
       <h2>statistics</h2>
       {total > 0 ? (
-        <>
-          <StatisticLine text="good" value={good} />
-          <StatisticLine text="neutral" value={neutral} />
-          <StatisticLine text="bad" value={bad} />
-          <StatisticLine text="all" value={total} />
-          <StatisticLine text="average" value={average} />
-          <StatisticLine text="positive" value={positive} />
-        </>
+        <table>
+          <tbody>
+            <StatisticLine text="good" value={good} />
+            <StatisticLine text="neutral" value={neutral} />
+            <StatisticLine text="bad" value={bad} />
+            <StatisticLine text="all" value={total} />
+            <StatisticLine text="average" value={average} />
+            <StatisticLine text="positive" value={positive} />
+          </tbody>
+        </table>
       ) : null}
     </>
   );
@@ -72,10 +74,13 @@ const Statistics = ({ good, neutral, bad, total, average, positive }) => {
 
 const StatisticLine = ({ text, value }) => {
   return (
-    <p>
-      {text} {value}
-      {text === "positive" ? "%" : ""}
-    </p>
+    <tr>
+      <td>{text}</td>
+      <td>
+        {value}
+        {text === "positive" ? "%" : ""}
+      </td>
+    </tr>
   );
 };
 
