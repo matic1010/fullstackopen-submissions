@@ -1,8 +1,6 @@
-# New note diagram
+# SPA page load diagram
 
-A diagram depicting the situation where the user creates a new note on the page https://studies.cs.helsinki.fi/exampleapp/notes by writing something into the text field and clicking the Save button.
-
-As an example, we try to add a note saying "Hello world!"
+A diagram depicting the situation where the user first visits the page https://studies.cs.helsinki.fi/exampleapp/spa.
 
 ```mermaid
   sequenceDiagram
