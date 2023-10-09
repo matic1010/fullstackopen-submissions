@@ -1,8 +1,16 @@
 const Course = ({ course }) => {
+  const sumOfExercises = course.parts.reduce(
+    (sum, current) => sum + current.exercises,
+    0
+  );
+
   return (
     <>
       <Header name={course.name} />
       <Content parts={course.parts} />
+      <p>
+        <strong>total of {sumOfExercises} exercises</strong>
+      </p>
     </>
   );
 };
