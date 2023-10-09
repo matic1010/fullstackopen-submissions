@@ -17,6 +17,8 @@ As an example, we try to add a note saying "Hello world!"
 
     Browser->>+Server: GET https://studies.cs.helsinki.fi/exampleapp/notes
 
+    note right of Browser: after the POST request, the page reloads entirely
+
 
     Server-->>-Browser: HTML document
 
