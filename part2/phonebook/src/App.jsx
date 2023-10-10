@@ -34,21 +34,39 @@ const App = () => {
 
   const addPerson = (event) => {
     event.preventDefault();
-    if (names.includes(newName)) {
-      alert(`${newName} is already added to phonebook`);
-      setNewName("");
-      return;
-    }
+
     const personToAdd = {
       name: newName,
       number: newNumber,
     };
+
+    if (names.includes(newName)) {
+      if (
+        window.confirm(
+          `${newName} is already added to phonebook. Update number?`
+        )
+      ) {
+        const idToUpdate = persons.find((person) => person.name === newName).id;
+        updatePerson(idToUpdate, personToAdd);
+      }
+      setNewName("");
+      setNewNumber("");
+      return;
+    }
 
     personService.create(personToAdd).then((newPerson) => {
       setPersons(persons.concat(newPerson));
       setNewName("");
       setNewNumber("");
     });
+  };
+
+  const updatePerson = (id, personToUpdate) => {
+    personService.update(id, personToUpdate);
+    const updatedPersons = persons.map((person) =>
+      person.id !== id ? person : personToUpdate
+    );
+    setPersons(updatedPersons);
   };
 
   const deletePerson = (id) => {

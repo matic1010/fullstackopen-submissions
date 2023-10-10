@@ -20,4 +20,9 @@ const remove = (id) => {
     .catch(() => console.log("ERROR DELETING POST"));
 };
 
-export default { getAll, create, remove };
+const update = (id, newPerson) => {
+  const request = axios.put(`${baseUrl}/${id}`, newPerson);
+  return request.then((response) => response.data);
+};
+
+export default { getAll, create, remove, update };
