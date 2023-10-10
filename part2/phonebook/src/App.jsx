@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import Filter from "./components/Filter";
 import PersonForm from "./components/PersonForm";
 import Persons from "./components/Persons";
-import axios from "axios";
+import personService from "./services/personService";
 
 const App = () => {
   const [persons, setPersons] = useState([]);
@@ -11,9 +11,7 @@ const App = () => {
   const [filter, setFilter] = useState("");
 
   useEffect(() => {
-    axios
-      .get("http://localhost:3001/persons")
-      .then((res) => setPersons(res.data));
+    personService.getAll().then((initialPeople) => setPersons(initialPeople));
   }, []);
 
   const handleFilterChange = (event) => {
@@ -46,9 +44,19 @@ const App = () => {
       number: newNumber,
     };
 
-    setPersons(persons.concat(personToAdd));
-    setNewName("");
-    setNewNumber("");
+    personService.create(personToAdd).then((newPerson) => {
+      setPersons(persons.concat(newPerson));
+      setNewName("");
+      setNewNumber("");
+    });
+  };
+
+  const deletePerson = (id) => {
+    const personToDelete = persons.find((person) => person.id === id);
+    if (!window.confirm(`Delete ${personToDelete.name}?`)) return;
+    personService.remove(id);
+    const newPersons = persons.filter((person) => person.id !== id);
+    setPersons(newPersons);
   };
 
   return (
@@ -64,7 +72,7 @@ const App = () => {
         newNumber={newNumber}
       />
       <h3>Numbers</h3>
-      <Persons persons={filteredPersons} />
+      <Persons persons={filteredPersons} onClick={deletePerson} />
     </div>
   );
 };
