@@ -1,18 +1,13 @@
 {
   "persons": [
     {
-      "name": "Dan Abramov",
-      "number": "132135t212341",
-      "id": 3
-    },
-    {
       "name": "Mary Poppendieck",
       "number": "39-23-6423122",
       "id": 4
     },
     {
       "name": "Nils Matic",
-      "number": "123235152",
+      "number": "12323",
       "id": 5
     }
   ]

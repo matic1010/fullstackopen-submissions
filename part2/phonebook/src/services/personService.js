@@ -15,9 +15,7 @@ const create = (newPerson) => {
 
 const remove = (id) => {
   const request = axios.delete(`${baseUrl}/${id}`);
-  request
-    .then(() => console.log("DELETE SUCCESSFUL"))
-    .catch(() => console.log("ERROR DELETING POST"));
+  return request.then(() => console.log("DELETE SUCCESSFUL"));
 };
 
 const update = (id, newPerson) => {
